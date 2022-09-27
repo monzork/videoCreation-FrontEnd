@@ -1,17 +1,7 @@
-import Welcome from '@/components/Welcome/Welcome';
-import ColorSchemeToggle from '@/components/ColorSchemeToggle/ColorSchemeToggle';
-
-import MainShell, { MainShellProps } from '@/components/Shells/DashboardShell/MainShell';
+import VideoGrid from '../video-grid/video-grid';
 
 export default function Home() {
   return (
-    <>
-      <Welcome />
-      <ColorSchemeToggle />
-    </>
+    <VideoGrid idUser={1}></VideoGrid>
   );
 }
-
-Home.getLayout = function getLayout(page: React.ReactElement<MainShellProps>) {
-  return <MainShell>{page}</MainShell>;
-};
