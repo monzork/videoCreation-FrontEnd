@@ -1,3 +1,3 @@
-import Home from '@/modules/home/Home';
+import Login from '@/modules/auth/Auth';
 
-export default Home;
+export default Login;
