@@ -1,7 +1,14 @@
+import MainShell, { MainShellProps } from '@/components/Shells/DashboardShell/MainShell';
 import VideoGrid from '../video-grid/video-grid';
 
 export default function Home() {
   return (
-    <VideoGrid idUser={1}></VideoGrid>
+    <>
+      <VideoGrid />
+    </>
   );
 }
+
+Home.getLayout = function getLayout(page: React.ReactElement<MainShellProps>) {
+  return <MainShell>{page}</MainShell>;
+};

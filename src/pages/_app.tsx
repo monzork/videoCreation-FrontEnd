@@ -8,6 +8,7 @@ import { getCookie, setCookie } from 'cookies-next';
 import { MantineProvider, ColorScheme, ColorSchemeProvider } from '@mantine/core';
 import { NotificationsProvider } from '@mantine/notifications';
 
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import type { Page } from '@/types/page';
 
 type Props = AppProps & {
@@ -27,24 +28,27 @@ export default function App(props: Props) {
 
   const getLayout = Component.getLayout ?? ((page) => page);
   const Layout = Component.layout ?? Fragment;
+  const queryClient = new QueryClient();
 
   return (
     <>
       <Head>
-        <title>DISS</title>
+        <title>Video Creation Platform</title>
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
         <link rel="shortcut icon" href="/favicon.svg" />
       </Head>
 
-      <Layout>
-        <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
-          <MantineProvider theme={{ colorScheme }} withGlobalStyles withNormalizeCSS>
-            <NotificationsProvider>
-              <>{getLayout(<Component {...pageProps} />)}</>
-            </NotificationsProvider>
-          </MantineProvider>
-        </ColorSchemeProvider>
-      </Layout>
+      <QueryClientProvider client={queryClient}>
+        <Layout>
+          <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
+            <MantineProvider theme={{ colorScheme }} withGlobalStyles withNormalizeCSS>
+              <NotificationsProvider>
+                <>{getLayout(<Component {...pageProps} />)}</>
+              </NotificationsProvider>
+            </MantineProvider>
+          </ColorSchemeProvider>
+        </Layout>
+      </QueryClientProvider>
     </>
   );
 }
