@@ -28,13 +28,7 @@ export default function VideoGrid() {
     <Grid>
       {video?.map((v) => (
         <Grid.Col span={4} key={v.id}>
-          <VideoCard
-            like={v.like}
-            title={v.title}
-            url={v.url}
-            name={v.name}
-            view={v.view}
-          />
+          <VideoCard like={v.like} title={v.title} url={v.url} name={v.name} view={v.view} />
         </Grid.Col>
       ))}
     </Grid>

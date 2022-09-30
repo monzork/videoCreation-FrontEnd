@@ -100,11 +100,7 @@ export default function NavbarNested() {
       </Navbar.Section>
 
       <Navbar.Section className={classes.footer}>
-        <UserButton
-          image="https://media-exp1.licdn.com/dms/image/C5603AQG5dZI4_tBEEA/profile-displayphoto-shrink_800_800/0/1657055788895?e=1668038400&v=beta&t=-L9Zfq8QZFop92KhQPLA_Jly8uFvlJTRDy_vinMJzcI"
-          name="Marlon Alonzo"
-          email="anullpointer@outlook.com"
-        />
+        <UserButton image="" name="Marlon Alonzo" email="anullpointer@outlook.com" />
       </Navbar.Section>
     </Navbar>
   );

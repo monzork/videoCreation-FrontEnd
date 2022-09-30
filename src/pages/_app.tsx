@@ -1,6 +1,7 @@
 import { Fragment, useState } from 'react';
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
+import axios from 'axios';
 
 import { AppProps } from 'next/app';
 import { getCookie, setCookie } from 'cookies-next';
@@ -9,6 +10,7 @@ import { MantineProvider, ColorScheme, ColorSchemeProvider } from '@mantine/core
 import { NotificationsProvider } from '@mantine/notifications';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import router from 'next/router';
 import type { Page } from '@/types/page';
 
 type Props = AppProps & {
@@ -25,6 +27,21 @@ export default function App(props: Props) {
     setColorScheme(nextColorScheme);
     setCookie('mantine-color-scheme', nextColorScheme, { maxAge: 60 * 60 * 24 * 30 });
   };
+
+  axios.interceptors.response.use(undefined, (err?) => {
+    if (!err) return Promise.reject(err);
+    if (err.response.status === 401 || err.response.data.message === '401 Unauthorized') {
+      router.push('/');
+    }
+    return Promise.reject(err);
+  });
+
+  axios.interceptors.request.use((request) => {
+    if (localStorage.token && localStorage.token !== 'undefined' && request.headers) {
+      request.headers.token = localStorage.token;
+    }
+    return request;
+  });
 
   const getLayout = Component.getLayout ?? ((page) => page);
   const Layout = Component.layout ?? Fragment;

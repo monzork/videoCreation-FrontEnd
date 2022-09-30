@@ -19,17 +19,19 @@ interface token {
 
 export default function SignUp() {
   const router = useRouter();
-  useEffect(() => {
-    if (localStorage.token) {
+  const goToDashboard = () => {
+    if (localStorage.token && localStorage.token !== 'undefined') {
       router.push('/dashboard');
     }
-  });
+  };
+  useEffect(() => goToDashboard);
   const mutation = useMutation(
     (signUpInfo: signInProps) =>
       axios.post<token>(`${process.env.NEXT_PUBLIC_API_BASE_URL!}/users`, signUpInfo),
     {
       onSuccess: (response) => {
         localStorage.token = response.data.token;
+        goToDashboard();
       },
     }
   );

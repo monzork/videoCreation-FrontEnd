@@ -1,4 +1,4 @@
-import { TextInput, Group, Button, Box, PasswordInput, Text } from '@mantine/core';
+import { TextInput, Group, Button, Box, PasswordInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
@@ -63,7 +63,7 @@ export default function Authentication() {
           <Button type="submit">Submit</Button>
         </Group>
       </form>
-      <Text>Sign Up</Text>
+      <Button onClick={() => router.push('/signup')}>Sign Up</Button>
     </Box>
   );
 }
